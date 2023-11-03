@@ -1,0 +1,12 @@
+prometheus.scrape "default" {
+  targets = [{
+    "__address__" = "demo.robustperception.io:9090",
+  }]
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.remote_write "default" {
+  endpoint {
+    url = "http://localhost:9009/api/prom/push"
+  }
+}
